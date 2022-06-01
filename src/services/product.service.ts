@@ -1,0 +1,101 @@
+import { DataSource, Repository } from 'typeorm';
+import { ProductEntity } from '../entities/product.entity';
+import { HttpException } from '../handler-exceptions/http-exception.provider';
+import { HttpStatus } from '../utils/enums/http-status.enum';
+import { CreatedProductDto } from '../dtos/product/created-product.dto';
+import { CreateProductDto } from '../dtos/product/create-product.dto';
+import { UpdateProductDto } from '../dtos/product/update-product.dto';
+
+
+
+
+export class ProductService {
+  private productRepository: Repository<ProductEntity>;
+
+  constructor(private readonly connection: DataSource) {
+    this.productRepository = this.connection.getRepository(ProductEntity);
+  }
+
+  async getAll(): Promise<CreatedProductDto[]> {
+    try {
+      const products = await this.productRepository.find({relations: ["category"]});
+      return products.map((product) => new CreatedProductDto(product));
+    } catch (error) {
+      throw new HttpException('Houve um erro ao listar os produtos!', HttpStatus.BAD_REQUEST);
+    }
+  }
+  
+  async create({categoryId, created_at, updated_at, person_count, description, disponibility, image, name, value,}: CreateProductDto): Promise<CreatedProductDto> {
+    try {
+      const createProduct = this.productRepository.create({
+        category: { id: categoryId },
+        created_at: { getDate: created_at },
+        updated_at: { getDate: updated_at },
+        person_count,
+        description,
+        disponibility,
+        image,
+        name,
+        value,
+      });
+      const saveProduct = await this.productRepository.save(createProduct);
+      return new CreatedProductDto(saveProduct);
+    } catch (error) {
+      console.log(error);
+      throw new HttpException(
+        "Houve um erro ao cadastrar produto!",
+        HttpStatus.BAD_REQUEST
+      );
+    }
+  }
+   
+  async show(id:string): Promise<CreatedProductDto>{
+    try {
+      const product = await this.productRepository.findOne({relations: ['category'], where:{id}});
+      if(!product){
+        throw new HttpException('Curso não encontrado!', HttpStatus.NOT_FOUND)
+      }
+      return new CreatedProductDto(product);
+    } catch (error) {
+      throw new HttpException('Houve um erro ao listar o produto', HttpStatus.BAD_REQUEST)
+    }
+  }  
+   
+
+  async update( id: string,{name, description,value, image, disponibility, categoryId, updated_at}: Partial<UpdateProductDto>): Promise<void>{
+    const oldProduct = await this.productRepository.findOne({ where: { id } });
+    if (!oldProduct ) {
+      throw new HttpException('Produto não encontrado!', HttpStatus.NOT_FOUND);
+    }
+   try{
+      const updateProduct = this.productRepository.merge(oldProduct, {
+        description,
+        disponibility,
+        image,
+        name,
+        value,
+        category: { id: categoryId },
+        updated_at: {getDate: updated_at}   
+
+      });
+      await this.productRepository.save(updateProduct);}
+    
+     catch (error) {
+      console.log(error)
+      throw new HttpException('Houve um erro ao atualizar curso!', HttpStatus.BAD_REQUEST);
+      
+    }
+  }
+
+  async delete(id:string): Promise<void>{
+    try {
+      const product = await this.productRepository.findOne({where:{id}});
+      if(!product){
+        throw new HttpException('Curso não encontrado!', HttpStatus.NOT_FOUND)
+      }
+      await this.productRepository.delete(id);
+    } catch (error) {
+      throw new HttpException('Houve um erro ao excluir curso!', HttpStatus.BAD_REQUEST);
+    }
+  }
+}

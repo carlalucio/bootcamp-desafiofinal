@@ -3,12 +3,13 @@ import { CategoryController } from './controllers/category.controllers';
 import { CategoryService } from './services/category.service';
 import { AppDataSource } from './config/data-source';
 import { validator } from './middlewares';
-import { UpdateCategoryDto } from './dtos/category/update-category.dto';
 import multer from 'multer';
 import { multerConfig } from './config/multer';
 import { UpdateProductDto } from './dtos/product/update-product.dto';
 import { CreateCategoryDto } from './dtos/category/create-category.dto';
 import { CreateProductDto } from './dtos/product/create-product.dto';
+import { ProductController } from './controllers/products.controllers';
+import { ProductService } from './services/product.service';
 
 const routes = Router();
 
