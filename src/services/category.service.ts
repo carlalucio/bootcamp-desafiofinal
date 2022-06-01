@@ -22,9 +22,9 @@ export class CategoryService {
     }
   }
 
-  async create({ name, created_at, updated_at }: CreateCategoryDto): Promise<CreatedCategoryDto> {
+  async create({ name }: CreateCategoryDto): Promise<CreatedCategoryDto> {
     try {
-      const createCategory = this.categoryRepository.create({ name, created_at:{ getDate: created_at}, updated_at:{ getDate: updated_at}});
+      const createCategory = this.categoryRepository.create({ name });
       const savedCategory = await this.categoryRepository.save(createCategory);
       return new CreatedCategoryDto(savedCategory);
     } catch (error) {

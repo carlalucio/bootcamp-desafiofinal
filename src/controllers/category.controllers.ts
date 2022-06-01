@@ -18,8 +18,8 @@ export class CategoryController {
     return response.status(HttpStatus.OK).json(categories);
   }
 
-  async create({ body: { name, created_at, updated_at} }: CreateCategoryBody, response: Response): Promise<Response<CreatedCategoryDto>> {
-    const createdCategory = await this.categoryService.create({ name, created_at, updated_at});
+  async create({ body: { name } }: CreateCategoryBody, response: Response): Promise<Response<CreatedCategoryDto>> {
+    const createdCategory = await this.categoryService.create({ name });
     return response.status(HttpStatus.CREATED).json(createdCategory);
   }
 

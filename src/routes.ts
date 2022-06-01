@@ -31,7 +31,6 @@ routes.get('/categories', (request: Request, response: Response, next: NextFunct
     })
   });
   
-  //Rota POST - para criar um novo recurso no Categories
 routes.post('/categories', CreateCategoryDto.validators(), validator, 
   (request: Request, response: Response,next: NextFunction) => {
     categoryController.create(request, response).catch((error: Error) =>{
@@ -52,7 +51,6 @@ routes.post('/products', multer(multerConfig).single('image'), CreateProductDto.
     next(error);
   })
 });
-
 
 routes.get('/products/:id', (request: Request, response: Response,next: NextFunction) => {
   productControler.show(request, response).catch((error: Error) =>{

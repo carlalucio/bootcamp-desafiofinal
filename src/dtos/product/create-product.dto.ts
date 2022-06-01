@@ -9,9 +9,7 @@ export class CreateProductDto extends RequestDto {
   image!: string;
   disponibility!: boolean; 
   categoryId!: string;
-  created_at!: Date;
-  updated_at!: Date;
-
+  
   static validators(): ValidationChain[] {
     return [
         body('name', 'Valor name não é uma string!').isString(),
@@ -27,13 +25,6 @@ export class CreateProductDto extends RequestDto {
         body("categoryId", "O campo categoryId é obrigatório!").notEmpty(),
         body("categoryId", "O campo categoryId deve ser uma string!").isString(),
         body("categoryId", "O campo categoryId deve ser um UUID!").isUUID(),
-        body("created_at", "O campo created_at deve ser um booleano!").isDate(),
-        body("created_at", "O campo created_at é obrigatório!").notEmpty({ignore_whitespace: true,}),
-        body("updated_at", "O campo updated_at deve ser um booleano!").isDate(),
-        body("updated_at", "O campo updated_at é obrigatório!").notEmpty({ignore_whitespace: true,}),
-
-        
-        
-            ];
+    ]
   }
 }

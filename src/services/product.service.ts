@@ -25,12 +25,10 @@ export class ProductService {
     }
   }
   
-  async create({categoryId, created_at, updated_at, person_count, description, disponibility, image, name, value,}: CreateProductDto): Promise<CreatedProductDto> {
+  async create({categoryId, person_count, description, disponibility, image, name, value,}: CreateProductDto): Promise<CreatedProductDto> {
     try {
       const createProduct = this.productRepository.create({
         category: { id: categoryId },
-        created_at: { getDate: created_at },
-        updated_at: { getDate: updated_at },
         person_count,
         description,
         disponibility,
@@ -62,7 +60,7 @@ export class ProductService {
   }  
    
 
-  async update( id: string,{name, description,value, image, disponibility, categoryId, updated_at}: Partial<UpdateProductDto>): Promise<void>{
+  async update( id: string,{name, description,value, image, disponibility, categoryId}: Partial<UpdateProductDto>): Promise<void>{
     const oldProduct = await this.productRepository.findOne({ where: { id } });
     if (!oldProduct ) {
       throw new HttpException('Produto não encontrado!', HttpStatus.NOT_FOUND);
@@ -74,9 +72,7 @@ export class ProductService {
         image,
         name,
         value,
-        category: { id: categoryId },
-        updated_at: {getDate: updated_at}   
-
+        category: { id: categoryId }
       });
       await this.productRepository.save(updateProduct);}
     
