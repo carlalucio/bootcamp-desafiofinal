@@ -16,7 +16,6 @@ export function validator(request: Request, response: Response, next: NextFuncti
     next();
   }
   
-  
 export function errorHandler(
     error: ErrorHandler,
     _request: Request,
