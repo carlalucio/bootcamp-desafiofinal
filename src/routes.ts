@@ -6,8 +6,9 @@ import { validator } from './middlewares';
 import { UpdateCategoryDto } from './dtos/category/update-category.dto';
 import multer from 'multer';
 import { multerConfig } from './config/multer';
-import { UpdateProductDto } from './dtos/course/update-product.dto';
+import { UpdateProductDto } from './dtos/product/update-product.dto';
 import { CreateCategoryDto } from './dtos/category/create-category.dto';
+import { CreateProductDto } from './dtos/product/create-product.dto';
 
 const routes = Router();
 
@@ -58,7 +59,7 @@ routes.get('/products/:id', (request: Request, response: Response,next: NextFunc
   })
 });
 
-routes.put('/products/:id',multer(multerConfig).single('image'), UpdateCourseDto.validators(), validator, (request: Request, response: Response,next: NextFunction) => {
+routes.put('/products/:id',multer(multerConfig).single('image'), UpdateProductDto.validators(), validator, (request: Request, response: Response,next: NextFunction) => {
   productControler.update(request, response).catch((error: Error) =>{
     next(error);
   }) 
