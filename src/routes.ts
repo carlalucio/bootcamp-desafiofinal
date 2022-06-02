@@ -10,6 +10,8 @@ import { CreateCategoryDto } from './dtos/category/create-category.dto';
 import { CreateProductDto } from './dtos/product/create-product.dto';
 import { ProductController } from './controllers/products.controllers';
 import { ProductService } from './services/product.service';
+import { Database } from 'sqlite3';
+import { CategoryEntity } from './entities/category.entity';
 
 const routes = Router();
 
@@ -22,11 +24,12 @@ const productControler = new ProductController(
 );
 
 routes.get('/', (request: Request, response: Response) => {
+
     return response.json({ status: 'success', version: '1.0.0'}).status(200)
   });
   
 routes.get('/categories', (request: Request, response: Response, next: NextFunction) => {
-    categoryController.getAll(request, response).catch((error: Error) =>{
+     categoryController.getAll(request, response).catch((error: Error) =>{
       next(error);
     })
   });
@@ -58,7 +61,7 @@ routes.get('/products/:id', (request: Request, response: Response,next: NextFunc
   })
 });
 
-routes.put('/products/:id',multer(multerConfig).single('image'), UpdateProductDto.validators(), validator, (request: Request, response: Response,next: NextFunction) => {
+routes.put('/products/:id', multer(multerConfig).single('image'), UpdateProductDto.validators(), validator, (request: Request, response: Response,next: NextFunction) => {
   productControler.update(request, response).catch((error: Error) =>{
     next(error);
   }) 

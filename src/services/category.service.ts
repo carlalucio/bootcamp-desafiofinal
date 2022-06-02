@@ -1,9 +1,11 @@
+import { request } from 'express';
 import { DataSource, Repository } from 'typeorm';
 import { CreateCategoryDto } from '../dtos/category/create-category.dto';
 import { CreatedCategoryDto } from '../dtos/category/created-category.dto';
 import { CategoryEntity } from '../entities/category.entity';
 import { HttpException } from '../handler-exceptions/http-exception.provider';
 import { HttpStatus } from '../utils/enums/http-status.enum';
+import { FileFilterCallback } from 'multer';
 
 
 export class CategoryService {
@@ -15,6 +17,7 @@ export class CategoryService {
 
   async getAll(): Promise<CreatedCategoryDto[]> {
     try {
+      
       const categories = await this.categoryRepository.find();
       return categories.map((category) => new CreatedCategoryDto(category));
     } catch (error) {

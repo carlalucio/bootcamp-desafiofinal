@@ -10,7 +10,7 @@ export class ProductController {
     constructor(private readonly productService: ProductService){}
 
     async getAll(request: Request, response: Response): Promise<Response<CreatedProductDto[]>>{
-        const courses = await this.productService.getAll();
+        const courses = await this.productService.getAll(request.query);
         return response.status(HttpStatus.OK).json(courses);
     }
     
