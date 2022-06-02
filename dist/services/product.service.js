@@ -5,7 +5,7 @@ const typeorm_1 = require("typeorm");
 const product_entity_1 = require("../entities/product.entity");
 const http_status_enum_1 = require("../utils/enums/http-status.enum");
 const created_product_dto_1 = require("../dtos/product/created-product.dto");
-const http_exception_provider_1 = require("../handler-Exceptions/http-exception.provider");
+const http_exception_provider_1 = require("../handler-exceptions/http-exception.provider");
 class ProductService {
     connection;
     productRepository;

@@ -6,7 +6,7 @@ const path_1 = require("path");
 const crypto_1 = require("crypto");
 const http_status_enum_1 = require("../../utils/enums/http-status.enum");
 const environment_variables_1 = require("../environment-variables");
-const http_exception_provider_1 = require("../../handler-Exceptions/http-exception.provider");
+const http_exception_provider_1 = require("../../handler-exceptions/http-exception.provider");
 const storageTypes = {
     local: (0, multer_1.diskStorage)({
         destination: (_req, _file, cb) => {

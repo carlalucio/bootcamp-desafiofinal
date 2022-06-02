@@ -3,8 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CategoryService = void 0;
 const created_category_dto_1 = require("../dtos/category/created-category.dto");
 const category_entity_1 = require("../entities/category.entity");
-const http_exception_provider_1 = require("../handler-exceptions/http-exception.provider");
 const http_status_enum_1 = require("../utils/enums/http-status.enum");
+const http_exception_provider_1 = require("../handler-exceptions/http-exception.provider");
 class CategoryService {
     connection;
     categoryRepository;
