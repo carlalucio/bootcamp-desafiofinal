@@ -10,8 +10,7 @@ import { CreateCategoryDto } from './dtos/category/create-category.dto';
 import { CreateProductDto } from './dtos/product/create-product.dto';
 import { ProductController } from './controllers/products.controllers';
 import { ProductService } from './services/product.service';
-import { Database } from 'sqlite3';
-import { CategoryEntity } from './entities/category.entity';
+
 
 const routes = Router();
 
