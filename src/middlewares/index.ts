@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { validationResult } from 'express-validator';
 import { MulterError } from 'multer';
-import { ErrorHandler } from '../handler-exceptions-rr/error-handler';
+import { ErrorHandler } from '../handler-exceptions/error-handler';
 import { HttpStatus } from '../utils/enums/http-status.enum';
 
 export function validator(request: Request, response: Response, next: NextFunction,

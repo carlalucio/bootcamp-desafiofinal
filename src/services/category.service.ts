@@ -3,7 +3,7 @@ import { CreateCategoryDto } from '../dtos/category/create-category.dto';
 import { CreatedCategoryDto } from '../dtos/category/created-category.dto';
 import { CategoryEntity } from '../entities/category.entity';
 import { HttpStatus } from '../utils/enums/http-status.enum';
-import { HttpException } from '../handler-exceptions-rr/http-exception.provider';
+import { HttpException } from '../handler-exceptions/http-exception.provider';
 
 
 
