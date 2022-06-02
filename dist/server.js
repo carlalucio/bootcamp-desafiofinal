@@ -7,13 +7,13 @@ const express_1 = __importDefault(require("express"));
 const routes_1 = require("./routes");
 const environment_variables_1 = require("./config/environment-variables");
 const data_source_1 = require("./config/data-source");
-const middlewares_1 = require("./middlewares");
 const path_1 = require("path");
+const index_1 = require("./middlewares/index");
 const PORT = environment_variables_1.env.PORT || 3000;
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use(routes_1.routes);
-app.use(middlewares_1.errorHandler);
+app.use(index_1.errorHandler);
 app.use('/files', express_1.default.static((0, path_1.resolve)(__dirname, '..', 'uploads')));
 data_source_1.AppDataSource.initialize()
     .then(() => {
