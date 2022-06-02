@@ -4,7 +4,7 @@ import { resolve } from 'path';
 import { randomBytes } from 'crypto';
 import { HttpStatus } from '../../utils/enums/http-status.enum';
 import { env } from '../environment-variables';
-import { HttpException } from '../../handler-exceptions/http-exception.provider';
+import { HttpException } from '../../handler-exceptions-rr/http-exception.provider';
 
 const storageTypes: Record<string, StorageEngine> = {
   local: diskStorage({
