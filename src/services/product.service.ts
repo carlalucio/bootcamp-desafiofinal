@@ -1,12 +1,11 @@
-import { DataSource, FindOperator, FindOptionsWhere, ILike, Repository, SimpleConsoleLogger } from 'typeorm';
+import { DataSource, FindOperator, FindOptionsWhere, ILike, Repository } from 'typeorm';
 import { ProductEntity } from '../entities/product.entity';
 import { HttpException } from '../handler-exceptions/http-exception.provider';
 import { HttpStatus } from '../utils/enums/http-status.enum';
 import { CreatedProductDto } from '../dtos/product/created-product.dto';
 import { CreateProductDto } from '../dtos/product/create-product.dto';
 import { UpdateProductDto } from '../dtos/product/update-product.dto';
-import { unlink } from 'fs';
-import { resolve } from 'path';
+
 
 
 
@@ -80,39 +79,9 @@ export class ProductService {
       throw new HttpException('Houve um erro ao listar o produto', HttpStatus.BAD_REQUEST)
     }
   }  
-  // async update(id: string,{categoryId,description,disponibility, image, name,    value,}: Partial<UpdateProductDto>): Promise<void> {
-  //   const oldProduct = await this.productRepository.findOne({relations: ["category"], where: { id },});
-  //   if (!oldProduct) {
-  //     throw new HttpException("Produto não encontrado!", HttpStatus.NOT_FOUND);
-  //   }
-  //   try {
-  //     if (image) {unlink(resolve(__dirname, "..", "..", "uploads", oldProduct.image),
-  //         (error: NodeJS.ErrnoException | null) => {
-  //           if (error) throw error;
-  //         }
-  //       );
-  //     }
-  //     const updateProduct = this.productRepository.merge(oldProduct, {
-  //       description,
-  //       disponibility :
-  //       typeof disponibility ==='string' && disponibility === 'true'
-  //       ? true
-  //       :false,
-  //       image,
-  //       name,
-  //       value,
-  //       category: { id: categoryId },
-  //     });
-  //     await this.productRepository.save(updateProduct);
-  //   } catch (error) {
-  //     throw new HttpException(
-  //       "Houve um erro ao atualizar curso!",
-  //       HttpStatus.BAD_REQUEST
-  //     );
-  //   }
-  // }
+
     async update( id: string,{name, description,value, image, disponibility, categoryId}: Partial<UpdateProductDto>): Promise<void>{
-    const oldProduct = await this.productRepository.findOne({ where: { id } });
+    const oldProduct = await this.productRepository.findOne({relations: ["category"], where: { id } });
     if (!oldProduct ) {
       throw new HttpException('Produto não encontrado!', HttpStatus.NOT_FOUND);
     }
@@ -120,7 +89,11 @@ export class ProductService {
       const updateProduct = this.productRepository.merge(oldProduct, {
         description,
         disponibility:
-        disponibility && typeof disponibility === 'string' && disponibility === 'true' ? true:false,
+        disponibility === undefined
+        ? undefined
+        : typeof disponibility === 'string' && disponibility === 'true'
+        ? true
+        : false,
         image,
         name,
         value,
