@@ -2,8 +2,8 @@ import express from 'express';
 import { routes } from './routes';
 import {env} from './config/environment-variables';
 import { AppDataSource } from './config/data-source';
-import { errorHandler } from './middlewares';
 import { resolve } from 'path';
+import { errorHandler } from './middlewares/index';
 
 const PORT = env.PORT || 3000;
 const app = express();
