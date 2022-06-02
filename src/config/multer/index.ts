@@ -2,9 +2,9 @@ import { Request } from 'express';
 import { diskStorage, FileFilterCallback, Options, StorageEngine,} from 'multer';
 import { resolve } from 'path';
 import { randomBytes } from 'crypto';
-import { HttpException } from '../../handler-exceptions/http-exception.provider';
 import { HttpStatus } from '../../utils/enums/http-status.enum';
 import { env } from '../environment-variables';
+import { HttpException } from '../../handler-Exceptions/http-exception.provider';
 
 const storageTypes: Record<string, StorageEngine> = {
   local: diskStorage({
