@@ -1,15 +1,10 @@
-import { DataSource, FindOperator, FindOptionsWhere, ILike, Repository } from 'typeorm';
+import { DataSource, FindOptionsWhere, ILike, Repository } from 'typeorm';
 import { ProductEntity } from '../entities/product.entity';
 import { HttpException } from '../handler-exceptions/http-exception.provider';
 import { HttpStatus } from '../utils/enums/http-status.enum';
 import { CreatedProductDto } from '../dtos/product/created-product.dto';
 import { CreateProductDto } from '../dtos/product/create-product.dto';
 import { UpdateProductDto } from '../dtos/product/update-product.dto';
-
-
-
-
-
 
 export class ProductService {
   private productRepository: Repository<ProductEntity>;
@@ -56,11 +51,9 @@ export class ProductService {
         name,
         value,
       });
-      console.log(createProduct)
       const saveProduct = await this.productRepository.save(createProduct);
       return new CreatedProductDto(saveProduct);
     } catch (error) {
-      console.log(error);
       throw new HttpException(
         "Houve um erro ao cadastrar produto!",
         HttpStatus.BAD_REQUEST
@@ -99,10 +92,8 @@ export class ProductService {
         value,
         category: { id: categoryId }
       });
-      console.log(updateProduct)
       await this.productRepository.save(updateProduct);}
-    
-     catch (error) {
+    catch (error) {
       console.log(error)
       throw new HttpException('Houve um erro ao atualizar curso!', HttpStatus.BAD_REQUEST);
       
