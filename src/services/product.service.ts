@@ -1,10 +1,10 @@
 import { DataSource, FindOptionsWhere, ILike, Repository } from 'typeorm';
 import { ProductEntity } from '../entities/product.entity';
-import { HttpException } from '../handler-exceptions/http-exception.provider';
 import { HttpStatus } from '../utils/enums/http-status.enum';
 import { CreatedProductDto } from '../dtos/product/created-product.dto';
 import { CreateProductDto } from '../dtos/product/create-product.dto';
 import { UpdateProductDto } from '../dtos/product/update-product.dto';
+import { HttpException } from '../handler-Exceptions/http-exception.provider';
 
 export class ProductService {
   private productRepository: Repository<ProductEntity>;
