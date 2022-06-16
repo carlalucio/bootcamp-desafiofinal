@@ -37,11 +37,11 @@ export class ProductService {
     }
   }
   
-  async create({categoryId, person_count, description, disponibility, image, name, value}: CreateProductDto): Promise<CreatedProductDto> {
+  async create({categoryId, size, description, disponibility, image, name, value}: CreateProductDto): Promise<CreatedProductDto> {
     try {
       const createProduct = this.productRepository.create({
         category: { id: categoryId },
-        person_count,
+        size,
         description,
         disponibility :
         typeof disponibility ==='string' && disponibility === 'true'
@@ -73,7 +73,7 @@ export class ProductService {
     }
   }  
 
-    async update( id: string,{name, description,value, image, disponibility, categoryId}: Partial<UpdateProductDto>): Promise<void>{
+    async update( id: string,{name, description,value, image,size, disponibility, categoryId}: Partial<UpdateProductDto>): Promise<void>{
     const oldProduct = await this.productRepository.findOne({relations: ["category"], where: { id } });
     if (!oldProduct ) {
       throw new HttpException('Produto não encontrado!', HttpStatus.NOT_FOUND);
@@ -90,6 +90,7 @@ export class ProductService {
         image,
         name,
         value,
+        size,
         category: { id: categoryId }
       });
       await this.productRepository.save(updateProduct);}

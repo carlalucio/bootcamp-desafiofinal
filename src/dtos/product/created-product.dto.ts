@@ -8,13 +8,13 @@ export class CreatedProductDto extends CreateProductDto {
   updatedAt?: Date;
   category?: CategoryEntity
   
-  constructor({ id, name, description, value, person_count, image, disponibility, category, createdAt, updatedAt}: ProductEntity) {
+  constructor({ id, name, description, value, size, image, disponibility, category, createdAt, updatedAt}: ProductEntity) {
     super();
     this.id = id;
     this.name = name;
     this.description = description;
     this.value = value;
-    this.person_count = person_count;
+    this.size = size;
     this.image = image;
     this.disponibility = disponibility ;  
     this.createdAt = createdAt;

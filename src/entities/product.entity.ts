@@ -15,8 +15,8 @@ export class ProductEntity {
   @Column({ type: 'float', nullable: false })
   value!: number;
 
-  @Column({ type: 'float', nullable: false })
-  person_count!: number;
+  @Column({ type: 'string', nullable: false })
+  size!: string;
 
   @Column({ type: 'varchar', nullable: false })
   image!: string;

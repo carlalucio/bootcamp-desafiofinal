@@ -5,7 +5,7 @@ export class CreateProductDto extends RequestDto {
   name!: string;
   description!: string;
   value!: number;
-  person_count!: number;
+  size!: string;
   image!: string;
   disponibility!: boolean; 
   categoryId!: string;
@@ -18,8 +18,8 @@ export class CreateProductDto extends RequestDto {
         body("description", "O campo description é obrigatório!").notEmpty({ignore_whitespace: true,}),
         body("value", "O campo value deve ser um número!").isNumeric(),
         body("value", "O campo value é obrigatório!").notEmpty({ignore_whitespace: true,}),
-        body("person_count", "O campo person_count deve ser um número!").isNumeric(),
-        body("person_count", "O campo person_count é obrigatório!").notEmpty({ignore_whitespace: true,}),
+        body("size", "O campo size deve ser uma string!").isString(),
+        body("size", "O campo size é obrigatório!").notEmpty({ignore_whitespace: true,}),
         body("disponibility", "O campo disponibility deve ser um booleano!").isBoolean(),
         body("disponibility", "O campo disponibility é obrigatório!").notEmpty({ignore_whitespace: true,}),
         body("categoryId", "O campo categoryId é obrigatório!").notEmpty(),
