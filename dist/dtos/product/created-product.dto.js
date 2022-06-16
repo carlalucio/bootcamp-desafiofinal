@@ -7,13 +7,13 @@ class CreatedProductDto extends create_product_dto_1.CreateProductDto {
     createdAt;
     updatedAt;
     category;
-    constructor({ id, name, description, value, person_count, image, disponibility, category, createdAt, updatedAt }) {
+    constructor({ id, name, description, value, size, image, disponibility, category, createdAt, updatedAt }) {
         super();
         this.id = id;
         this.name = name;
         this.description = description;
         this.value = value;
-        this.person_count = person_count;
+        this.size = size;
         this.image = image;
         this.disponibility = disponibility;
         this.createdAt = createdAt;

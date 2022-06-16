@@ -7,7 +7,7 @@ class CreateProductDto extends request_dto_1.RequestDto {
     name;
     description;
     value;
-    person_count;
+    size;
     image;
     disponibility;
     categoryId;
@@ -19,8 +19,8 @@ class CreateProductDto extends request_dto_1.RequestDto {
             (0, express_validator_1.body)("description", "O campo description é obrigatório!").notEmpty({ ignore_whitespace: true, }),
             (0, express_validator_1.body)("value", "O campo value deve ser um número!").isNumeric(),
             (0, express_validator_1.body)("value", "O campo value é obrigatório!").notEmpty({ ignore_whitespace: true, }),
-            (0, express_validator_1.body)("person_count", "O campo person_count deve ser um número!").isNumeric(),
-            (0, express_validator_1.body)("person_count", "O campo person_count é obrigatório!").notEmpty({ ignore_whitespace: true, }),
+            (0, express_validator_1.body)("size", "O campo size deve ser uma string!").isString(),
+            (0, express_validator_1.body)("size", "O campo size é obrigatório!").notEmpty({ ignore_whitespace: true, }),
             (0, express_validator_1.body)("disponibility", "O campo disponibility deve ser um booleano!").isBoolean(),
             (0, express_validator_1.body)("disponibility", "O campo disponibility é obrigatório!").notEmpty({ ignore_whitespace: true, }),
             (0, express_validator_1.body)("categoryId", "O campo categoryId é obrigatório!").notEmpty(),

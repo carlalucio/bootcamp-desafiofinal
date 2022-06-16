@@ -14,7 +14,7 @@ let ProductEntity = class ProductEntity {
     name;
     description;
     value;
-    person_count;
+    size;
     image;
     disponibility;
     createdAt;
@@ -34,8 +34,8 @@ __decorate([
     (0, typeorm_1.Column)({ type: 'float', nullable: false })
 ], ProductEntity.prototype, "value", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'float', nullable: false })
-], ProductEntity.prototype, "person_count", void 0);
+    (0, typeorm_1.Column)({ type: 'varchar', nullable: false })
+], ProductEntity.prototype, "size", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: 'varchar', nullable: false })
 ], ProductEntity.prototype, "image", void 0);

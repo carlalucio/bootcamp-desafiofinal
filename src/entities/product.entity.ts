@@ -15,7 +15,7 @@ export class ProductEntity {
   @Column({ type: 'float', nullable: false })
   value!: number;
 
-  @Column({ type: 'string', nullable: false })
+  @Column({ type: 'varchar', nullable: false })
   size!: string;
 
   @Column({ type: 'varchar', nullable: false })

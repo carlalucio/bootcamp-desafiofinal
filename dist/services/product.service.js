@@ -33,11 +33,11 @@ class ProductService {
             throw new http_exception_provider_1.HttpException('Houve um erro ao listar os produtos!', http_status_enum_1.HttpStatus.BAD_REQUEST);
         }
     }
-    async create({ categoryId, person_count, description, disponibility, image, name, value }) {
+    async create({ categoryId, size, description, disponibility, image, name, value }) {
         try {
             const createProduct = this.productRepository.create({
                 category: { id: categoryId },
-                person_count,
+                size,
                 description,
                 disponibility: typeof disponibility === 'string' && disponibility === 'true'
                     ? true
@@ -65,7 +65,7 @@ class ProductService {
             throw new http_exception_provider_1.HttpException('Houve um erro ao listar o produto', http_status_enum_1.HttpStatus.BAD_REQUEST);
         }
     }
-    async update(id, { name, description, value, image, disponibility, categoryId }) {
+    async update(id, { name, description, value, image, size, disponibility, categoryId }) {
         const oldProduct = await this.productRepository.findOne({ relations: ["category"], where: { id } });
         if (!oldProduct) {
             throw new http_exception_provider_1.HttpException('Produto não encontrado!', http_status_enum_1.HttpStatus.NOT_FOUND);
@@ -81,6 +81,7 @@ class ProductService {
                 image,
                 name,
                 value,
+                size,
                 category: { id: categoryId }
             });
             await this.productRepository.save(updateProduct);
