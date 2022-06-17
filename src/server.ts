@@ -4,11 +4,16 @@ import {env} from './config/environment-variables';
 import { AppDataSource } from './config/data-source';
 import { resolve } from 'path';
 import { errorHandler } from './middlewares/index';
+import cors from 'cors'
 
 const PORT = env.PORT || 3000;
 const app = express();
 app.use(express.json());
 app.use(routes);
+app.use(cors({
+    origin: '*',
+    methods: ['GET','HEAD','PUT','PATCH','POST','DELETE']
+}));
 app.use(errorHandler);
 app.use('/files', express.static(resolve(__dirname, '..', 'uploads')))
 
