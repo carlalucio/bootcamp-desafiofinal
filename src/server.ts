@@ -4,7 +4,7 @@ import {env} from './config/environment-variables';
 import { AppDataSource } from './config/data-source';
 import { resolve } from 'path';
 import { errorHandler } from './middlewares/index';
-import cors from 'cors'
+import cors from 'cors';
 
 const PORT = env.PORT || 3000;
 const app = express();
