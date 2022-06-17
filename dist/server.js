@@ -14,11 +14,9 @@ const PORT = environment_variables_1.env.PORT || 3000;
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use(routes_1.routes);
-app.use((0, cors_1.default)({
-    origin: '*',
-    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE']
-}));
+app.use((0, cors_1.default)());
 app.use(index_1.errorHandler);
+app.use(express_1.default.urlencoded({ extended: true }));
 app.use('/files', express_1.default.static((0, path_1.resolve)(__dirname, '..', 'uploads')));
 data_source_1.AppDataSource.initialize()
     .then(() => {
