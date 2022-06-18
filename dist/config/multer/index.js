@@ -7,10 +7,11 @@ const http_status_enum_1 = require("../../utils/enums/http-status.enum");
 const environment_variables_1 = require("../environment-variables");
 const http_exception_provider_1 = require("../../handler-exceptions/http-exception.provider");
 const path_1 = require("path");
+const directory = (0, path_1.resolve)(__dirname, '..', '..', '..', 'dist', 'uploads');
 const storageTypes = {
     local: (0, multer_1.diskStorage)({
         destination: (_req, _file, cb) => {
-            cb(null, (0, path_1.resolve)(__dirname, '..', '..', '..', 'uploads'));
+            cb(null, directory);
         },
         filename: (_req, file, cb) => {
             (0, crypto_1.randomBytes)(16, (err, hash) => {
@@ -23,7 +24,7 @@ const storageTypes = {
     }),
 };
 exports.multerConfig = {
-    dest: (0, path_1.resolve)(__dirname, '..', '..', '..', 'uploads'),
+    dest: directory,
     storage: storageTypes[environment_variables_1.env.STORAGE_TYPE ?? 'local'],
     limits: { fileSize: 2 * 1024 * 1024 },
     fileFilter: (_request, file, cb) => {

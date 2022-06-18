@@ -7,10 +7,12 @@ import { env } from '../environment-variables';
 import { HttpException } from '../../handler-exceptions/http-exception.provider';
 import { resolve } from 'path';
 
+const directory = resolve(__dirname, '..', '..', '..', 'dist', 'uploads');
+
 const storageTypes: Record<string, StorageEngine> = {
   local: diskStorage({
     destination: (_req: Request, _file: Express.Multer.File, cb:  (error: Error | null, destination: string)=>void) => {
-      cb(null,  resolve(__dirname, '..', '..', '..', 'uploads'));
+      cb(null,   directory);
     },
     filename: (_req, file: Express.Multer.File, cb: (error: Error | null, filename: string) => void) => {
       randomBytes(16, (err: Error | null, hash: Buffer) => {
@@ -23,7 +25,7 @@ const storageTypes: Record<string, StorageEngine> = {
 };
 
 export const multerConfig = {
-  dest:  resolve(__dirname, '..', '..', '..', 'uploads'),
+  dest:   directory,
   storage: storageTypes[env.STORAGE_TYPE ?? 'local'],
   limits: { fileSize: 2 * 1024 * 1024 },
   fileFilter: (_request: Request,file: Express.Multer.File,cb: FileFilterCallback,) => {
