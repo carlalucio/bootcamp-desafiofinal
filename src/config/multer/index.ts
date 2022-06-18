@@ -1,15 +1,16 @@
 import { Request } from 'express';
 import { diskStorage, FileFilterCallback, Options, StorageEngine,} from 'multer';
-import { resolve } from 'path';
+
 import { randomBytes } from 'crypto';
 import { HttpStatus } from '../../utils/enums/http-status.enum';
 import { env } from '../environment-variables';
 import { HttpException } from '../../handler-exceptions/http-exception.provider';
+import { resolve } from 'path';
 
 const storageTypes: Record<string, StorageEngine> = {
   local: diskStorage({
-    destination: (_req: Request, _file: Express.Multer.File, cb: (error: Error | null, destination: string)=>void) => {
-      cb(null, resolve(__dirname, '..', '..', '..', 'uploads'));
+    destination: (_req: Request, _file: Express.Multer.File, cb:  (error: Error | null, destination: string)=>void) => {
+      cb(null,  resolve(__dirname, '..', '..', '..', 'uploads'));
     },
     filename: (_req, file: Express.Multer.File, cb: (error: Error | null, filename: string) => void) => {
       randomBytes(16, (err: Error | null, hash: Buffer) => {
@@ -22,7 +23,7 @@ const storageTypes: Record<string, StorageEngine> = {
 };
 
 export const multerConfig = {
-  dest: resolve(__dirname, '..', '..', '..', 'uploads'),
+  dest:  resolve(__dirname, '..', '..', '..', 'uploads'),
   storage: storageTypes[env.STORAGE_TYPE ?? 'local'],
   limits: { fileSize: 2 * 1024 * 1024 },
   fileFilter: (_request: Request,file: Express.Multer.File,cb: FileFilterCallback,) => {

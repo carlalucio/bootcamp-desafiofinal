@@ -5,6 +5,7 @@ import { AppDataSource } from './config/data-source';
 import { resolve } from 'path';
 import { errorHandler } from './middlewares/index';
 import cors from 'cors';
+import fs from 'fs';
 
 const PORT = env.PORT || 3000;
 const app = express();
@@ -18,6 +19,10 @@ app.use(
   );
 app.use(errorHandler);
 app.use('/files', express.static(resolve(__dirname, '..', 'uploads')))
+
+const directory = resolve(__dirname, '..', 'dist', 'uploads')
+fs.rmSync(directory, {force: true})
+fs.mkdirSync(directory)
 
 
 AppDataSource.initialize()

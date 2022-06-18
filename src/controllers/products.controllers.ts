@@ -1,4 +1,5 @@
 import {Request, Response} from 'express';
+import { resolve } from 'path';
 import { CreatedProductDto } from '../dtos/product/created-product.dto';
 import { ProductService } from '../services/product.service';
 import { HttpStatus } from '../utils/enums/http-status.enum';
@@ -33,4 +34,10 @@ export class ProductController {
         await this.productService.delete(params.id);
         return response.status(HttpStatus.NO_CONTENT).json();
       }
+
+      async getImgByName(
+        {params}: Request, response: Response): Promise<any>{
+          const directory = resolve(__dirname, '..', 'uploads');
+          return response.status(HttpStatus.OK).sendFile(`${directory}/${params.name}`);
+        }
     }

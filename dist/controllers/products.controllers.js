@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductController = void 0;
+const path_1 = require("path");
 const http_status_enum_1 = require("../utils/enums/http-status.enum");
 class ProductController {
     productService;
@@ -26,6 +27,10 @@ class ProductController {
     async delete({ params }, response) {
         await this.productService.delete(params.id);
         return response.status(http_status_enum_1.HttpStatus.NO_CONTENT).json();
+    }
+    async getImgByName({ params }, response) {
+        const directory = (0, path_1.resolve)(__dirname, '..', 'uploads');
+        return response.status(http_status_enum_1.HttpStatus.OK).sendFile(`${directory}/${params.name}`);
     }
 }
 exports.ProductController = ProductController;

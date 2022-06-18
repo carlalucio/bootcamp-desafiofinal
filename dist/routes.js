@@ -38,6 +38,11 @@ routes.get('/products', (request, response, next) => {
         next(error);
     });
 });
+routes.get('/products/img/:name', (request, response, next) => {
+    productControler.getImgByName(request, response).catch((error) => {
+        next(error);
+    });
+});
 routes.post('/products', (0, multer_1.default)(multer_2.multerConfig).single('image'), create_product_dto_1.CreateProductDto.validators(), middlewares_1.validator, (request, response, next) => {
     productControler.create(request, response).catch((error) => {
         next(error);
